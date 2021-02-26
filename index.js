@@ -25,8 +25,9 @@ myFunction();
     2. Use a counter to return the summation of that number. 
     
 For example, `summation(4)` should return 10 because 1+2+3+4 is 10. Note, you may use a for loop for this function if you wish */
-
-function summation(num1, num2) {}
+function summation(array) {
+  for (let i = 0; i < array.length; i++) {}
+}
 
 // 🦁🦁🦁 Topic 2: ADVANCED Array Methods 🦁🦁🦁
 // Given this zoo data from around the United States, follow the instructions below. Use the specific array methods in the requests below to solve the problems.
@@ -100,8 +101,14 @@ const zooAnimals = [
   displayNames will be an array of strings, and each string should follow this pattern: "name: {name}, scientific: {scientific name}"
   */
 
-function animalNames(/*Your Code Here*/) {
-  /*Your Code Here*/
+function animalNames(arr) {
+  const displayNames = [];
+  arr.forEach((animal) => {
+    displayNames.push(
+      `name: ${animal.animal_name}, scientific: ${animal.scientific_name}`
+    );
+  });
+  return displayNames;
 }
 
 /* 🦁🦁🦁 Request 2: .map() 🦁🦁🦁
@@ -110,8 +117,10 @@ function animalNames(/*Your Code Here*/) {
   For example: ['jackal, asiatic', .....]
   */
 
-function lowerCaseNames(/*Your Code Here*/) {
-  /*Your Code Here*/
+function lowerCaseNames(arr) {
+  return arr.map((animal) => {
+    return animal.animal_name.toLowerCase();
+  });
 }
 
 /* 🦁🦁🦁 Request 3: .filter() 🦁🦁🦁
@@ -119,8 +128,8 @@ function lowerCaseNames(/*Your Code Here*/) {
   Using lowPopulationAnimals use .filter() to create a new array of objects which contains only the animals with a population of less than 5.
   */
 
-function lowPopulationAnimals(/*Your Code Here*/) {
-  /*Your Code Here*/
+function lowPopulationAnimals(arr) {
+  return arr.filter((animal) => animal.population < 5);
 }
 
 /* 🦁🦁🦁 Request 4: .reduce() 🦁🦁🦁
@@ -129,8 +138,10 @@ function lowPopulationAnimals(/*Your Code Here*/) {
   Remember the reduce method takes two arguments: a callback (which itself takes two args - the accumulator and the item), and an initial value for the count.
   */
 
-function USApop(/*Your Code Here*/) {
-  /*Your Code Here*/
+function USApop(arr) {
+  return arr.reduce((a, animals) => {
+    return a + animals.population;
+  }, 0);
 }
 
 // 🦁🦁🦁 Callbacks 🦁🦁🦁
@@ -141,9 +152,7 @@ function USApop(/*Your Code Here*/) {
  * The consume function should return the invocation of cb, passing a and b into cb as arguments
  */
 
-function consume(/*Your Code Here */) {
-  /*Your Code Here */
-}
+function consume() {}
 
 /* 🦁🦁🦁 Step 2: Create several functions to callback with consume(); 🦁🦁🦁 */
 // 🦁🦁🦁 Use add to return the sum of two numbers 🦁🦁🦁
@@ -177,18 +186,28 @@ function greeting(/*Your Code Here */) {
 /* 🐴🐴🐴 Step 1: Base Constructor 🐴🐴🐴
  Use the constructor function named CuboidMaker to accept properties for length, width, and height which can be initialized as an object
 */
-function CuboidMaker(/*Your Code Here */) {
-  /*Your Code Here */
+function CuboidMaker(attribute) {
+  this.length = attribute.length;
+  this.width = attribute.width;
+  this.height = attribute.height;
 }
 
 /* 🐴🐴🐴 Step 2: Volume Method 🐴🐴🐴
   Create a method called volume using CuboidMaker's prototype that returns the volume of a given cuboid's length, width, and height
   Formula for cuboid volume: length * width * height   */
-
+CuboidMaker.prototype.volume = function () {
+  return this.length * this.width * this.height;
+};
 /* 🐴🐴🐴 Step 3: Surface Area Method 🐴🐴🐴
   Create another method called surfaceArea using CuboidMaker's prototype that returns the surface area of a given cuboid's length, width, and height. 
   Formula for cuboid surface area of a cube: 
   2 * (length * width + length * height + width * height)  */
+
+CuboidMaker.prototype.surfaceArea = function () {
+  return (
+    2 * (this.width + this.length * this.height + this.width * this.height)
+  );
+};
 
 /* 🐴🐴🐴 Step 4: Create a new object that uses CuboidMaker 🐴🐴🐴
   Create an object called cuboid that uses the new keyword to use our CuboidMaker constructor
